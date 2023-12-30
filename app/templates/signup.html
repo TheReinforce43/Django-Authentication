@@ -1,0 +1,36 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% load crispy_forms_tags %}
+
+<style> 
+
+  .success{
+    border:1px solid gray;
+    background-color:black;
+    color:white;
+  }
+
+</style>
+
+{% if messages %} {% for m in messages %}
+<small {% if m.tags %} class='{{m.tags}}' {% endif %}>{{m}}</small>
+{% endfor %} {% endif %} 
+<form action="" method="POST" style="width: 50%; margin: auto" novalidate>
+  <!--{{form |crispy}} -->
+  {% csrf_token %} {% for fm in form %} {{fm.label_tag }} {{ fm }}
+  {{fm.errors|striptags }} {% endfor %}
+  <div class="text-center mt-4">
+    <button class="btn btn-info" type="submit">Submit</button>
+    <small>Already have an account ? <a href="{% url "log_in" %}">Log In</a></small>
+  </div>
+</form>
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1>Afetr login,Welcome to Profile Page</h1>
+<h1>Hello Mr/Mrs.  {{UserName}}</h1>
+<p><a class='btn btn-info' href="{% url "pass_change" %}">Change Your Password</a>
+<a class='btn btn-success' href="{% url "pass_change_without_validation" %}">Password Reset Without Previous Password</a></p>
+
+{% if messages %}
+    {% for m  in messages  %}
+
+        <small class='bg-secondary text-white p-3'>{{m}}</small>
+    
+    {% endfor %}
+
+{% endif %}
+
+<form action="" method="post" style='width:50%;margin:auto' novalidate>
+
+    {% csrf_token %}
+    <!--{{form|crispy}}-->
+
+    {% if form.non_field_errors %}
+        {% for er in form.non_field_errors %}
+        
+            <p class='bg-danger class-white p-3'>{{er}}</p>
+        
+        {% endfor %}
+    
+    {% endif %}
+
+    {% for fm in form  %}
+
+        {{fm.label_tag}}
+        {{fm}}
+        {{fm.errors|striptags}}
+    
+    {% endfor %}
+
+    <div class="text-center">
+        <button class='btn btn-info mt-3' type="submit">Submit</button>
+    </div>
+    
+
+</form>
+
+
+{% endblock content %}
+
+
