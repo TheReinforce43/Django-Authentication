@@ -9,11 +9,8 @@ class RegistrationForm(UserCreationForm):
     last_name=forms.CharField(widget=forms.TextInput(attrs={'id':'required'}))   
 
     class Meta:
-
-    
-      
+        model=User
         fields=['username','first_name','last_name','email']
-
         help_texts={
             'first_name':'Please enter your first name',
             'last_name':'Please enter your last name',
